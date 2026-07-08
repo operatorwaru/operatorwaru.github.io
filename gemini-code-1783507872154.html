@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operator BOSP Waru</title>
+    <link rel="icon" type="image/x-icon" href="https://upload.wikimedia.org/wikipedia/commons/8/84/Lambang_Daerah_Kab._Pamekasan%2C_Jawa_Timur.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+    <style>
+        body, html { margin: 0; padding: 0; height: 100vh; width: 100%; overflow: hidden; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        #bg-slideshow { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; background-size: cover; background-position: center; transition: background-image 1s ease-in-out; }
+
+        /* Overlay Gradasi agar teks selalu terbaca dengan jelas */
+        .gradient-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.7) 0%, rgba(15, 32, 39, 0.6) 100%);
+        }
+
+        /* Styling untuk teks shadow umum agar lebih pop-out */
+        .text-shadow {
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+        }
+        
+        /* Styling untuk widget jam dan tanggal */
+        .jam-digital {
+            font-size: 6rem;
+            font-weight: bold; /* Dibuat tebal (bold) */
+            line-height: 1;
+        }
+
+        .tanggal-digital {
+            font-size: 1.5rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+        }
+
+        /* Styling khusus untuk area Quotes */
+        .quote-area {
+            font-size: 1.1rem;
+            font-weight: 300;
+            font-style: italic;
+            color: #e0e0e0;
+            max-width: 600px;
+            margin: 0 auto;
+            transition: opacity 0.5s ease;
+        }
+
+        /* Styling untuk Ikon Menu Desktop */
+        .desktop-icon {
+            color: white;
+            text-decoration: none;
+            transition: transform 0.2s, background-color 0.2s;
+            padding: 15px;
+            border-radius: 10px;
+            width: 110px;
+        }
+
+        .desktop-icon:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px);
+            color: white;
+        }
+
+        /* Kotak pembungkus seragam agar tinggi ikon & gambar sama rata */
+        .icon-box {
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+
+        /* Mengatur ukuran Bootstrap Icon di dalam kotak */
+        .desktop-icon i {
+            font-size: 2.5rem;
+            line-height: 1;
+        }
+
+        /* Mengatur ukuran Gambar URL di dalam kotak */
+        .desktop-icon img {
+            height: 2.5rem;
+            width: 2.5rem;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+
+        .desktop-icon span {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="bg-slideshow"></div>
+    <div class="gradient-overlay"></div>
+
+    <div class="container-fluid h-100 d-flex flex-column justify-content-center align-items-center text-white text-center">
+        
+        <h2 id="ucapan-selamat" class="mb-4 fw-light text-shadow">Memuat ucapan...</h2>
+
+        <div class="widget-waktu mb-3 text-shadow">
+            <div id="jam" class="jam-digital">00:00</div>
+            <div id="tanggal" class="tanggal-digital text-uppercase mt-2">Memuat tanggal...</div>
+        </div>
+
+        <div class="quote-area mb-5 text-shadow">
+            <span id="teks-quote">"Memuat kata-kata semangat..."</span>
+        </div>
+
+        <div class="d-flex gap-3 flex-wrap justify-content-center mt-4">
+            <a href="https://bosp.kemendikdasmen.go.id/" target="_blank" class="desktop-icon text-center">
+                <div class="icon-box"><img src="logo-bosp.png" alt="BOS Salur"></div>
+                <span>BOSP Salur</span>
+            </a>
+            <a href="https://arkas.kemendikdasmen.go.id/" target="_blank" class="desktop-icon text-center">
+                <div class="icon-box"><img src="https://pusatinformasi.rumahpendidikan.kemendikdasmen.go.id/hc/article_attachments/52435472160153" alt="Arkas"></div>
+                <span>Arkas</span>
+            </a>
+            <a href="https://pamekasankab.simpelbosp.id/" target="_blank" class="desktop-icon text-center">
+                <div class="icon-box"><img src="https://upload.wikimedia.org/wikipedia/commons/8/84/Lambang_Daerah_Kab._Pamekasan%2C_Jawa_Timur.png" alt="Simpel BOSP"></div>
+                <span>Sipbos</span>
+            </a>
+            <a href="https://sekolah.simasda.com/" target="_blank" class="desktop-icon text-center">
+                <div class="icon-box"><img src="https://upload.wikimedia.org/wikipedia/commons/8/84/Lambang_Daerah_Kab._Pamekasan%2C_Jawa_Timur.png" alt="Simasda"></div>
+                <span>Simasda</span>
+            </a>
+            <a href="https://coretaxdjp.pajak.go.id/identityproviderportal/Account/Login" target="_blank" class="desktop-icon text-center">
+                <div class="icon-box"><img src="coretax.png" alt="Coretax"></div>
+                <span>Coretax</span>
+            </a>
+            <a href="https://keuanganpamekasankab.com/simpad/mamin/index.php" target="_blank" class="desktop-icon text-center">
+                <div class="icon-box"><img src="https://upload.wikimedia.org/wikipedia/commons/8/84/Lambang_Daerah_Kab._Pamekasan%2C_Jawa_Timur.png" alt="SiBocil"></div>
+                <span>SiBocil</span>
+            </a>
+        </div>
+
+        <div class="d-flex gap-3 flex-wrap justify-content-center mt-4">
+            <a href="https://operatorwaru.github.io/koras-waru/" target="_blank" class="desktop-icon text-center">
+                <div class="icon-box"><i class="bi bi-box-seam"></i></div>
+                <span>Koras</span>
+            </a>
+            <a href="https://operatorwaru.github.io/stock-opname/" target="_blank" class="desktop-icon text-center">
+                <div class="icon-box"><i class="bi bi-columns-gap"></i></div>
+                <span>Stock</span>
+            </a>
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // --- 1. Data Urutan Gambar Latar & Quotes ---
+        const gambarBackground = [
+            'https://images.unsplash.com/photo-1477346611705-65d1883cee1e?q=80&w=1920&auto=format&fit=crop',
+            'https://images.unsplash.com/photo-1699102242959-6a1fcc32b152?q=80&w=1920&auto=format&fit=crop',
+            'https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=1920&auto=format&fit=crop'
+        ];
+
+        const kumpulanQuotes = [
+            '"Data yang akurat adalah kunci kemajuan administrasi sekolah kita."',
+            '"Di balik sekolah yang hebat, ada Operator Sekolah yang tangguh dan teliti."',
+            '"Kesabaranmu menghadapi server error adalah pahlawan tanpa tanda jasa."',
+            '"Teknologi memudahkan, tapi ketelitian kamulah yang menyempurnakannya."',
+            '"Tarik nafas, minum kopi, dan mari selesaikan sinkronisasi hari ini."'
+        ];
+        
+        let indeksSaatIni = 0;
+        const bgElement = document.getElementById('bg-slideshow');
+        const quoteElement = document.getElementById('teks-quote');
+
+        // --- 2. Logika Pembaruan Slideshow & Ganti Quote ---
+        function ubahBackgroundDanQuote() {
+            // Ganti gambar latar
+            bgElement.style.backgroundImage = `url('${gambarBackground[indeksSaatIni]}')`;
+            
+            // Ganti quote secara bersamaan menggunakan sisa bagi (%)
+            const indexQuote = indeksSaatIni % kumpulanQuotes.length;
+            quoteElement.textContent = kumpulanQuotes[indexQuote];
+
+            // Pindah ke indeks berikutnya
+            indeksSaatIni = (indeksSaatIni + 1) % gambarBackground.length;
+        }
+
+        // Jalankan fungsi ini saat pertama kali web dibuka, lalu ulangi tiap 8 detik
+        ubahBackgroundDanQuote();
+        setInterval(ubahBackgroundDanQuote, 8000);
+
+
+        // --- 3. Logika Jam, Tanggal, dan Ucapan Dinamis ---
+        function updateWaktu() {
+            const sekarang = new Date();
+            
+            // Pengaturan Jam (Format HH:MM)
+            const jamAngka = sekarang.getHours();
+            const jamText = String(jamAngka).padStart(2, '0');
+            const menitText = String(sekarang.getMinutes()).padStart(2, '0');
+            document.getElementById('jam').textContent = `${jamText}:${menitText}`;
+
+            // Pengaturan Tanggal Bahasa Indonesia
+            const opsiTanggal = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('tanggal').textContent = sekarang.toLocaleDateString('id-ID', opsiTanggal);
+
+            // Menentukan Kalimat Ucapan berdasarkan Jam
+            let sapaan = "";
+            if (jamAngka >= 0 && jamAngka < 11) {
+                sapaan = "Selamat Pagi";
+            } else if (jamAngka >= 11 && jamAngka < 15) {
+                sapaan = "Selamat Siang";
+            } else if (jamAngka >= 15 && jamAngka < 18) {
+                sapaan = "Selamat Sore";
+            } else {
+                sapaan = "Selamat Malam";
+            }
+            
+            // Tampilkan sapaan dinamis ke layar
+            document.getElementById('ucapan-selamat').textContent = `${sapaan}, Operator Waru`;
+        }
+
+        // Jalankan jam segera, lalu perbarui setiap 1 detik
+        updateWaktu();
+        setInterval(updateWaktu, 1000);
+
+
+        // ==========================================
+        // PROTEKSI HALAMAN
+        // ==========================================
+        document.addEventListener('contextmenu', e => e.preventDefault());
+        document.addEventListener('keydown', e => {
+            if (e.key === 'F12' || e.keyCode === 123) e.preventDefault();
+            if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j')) e.preventDefault();
+            if (e.ctrlKey && (e.key === 'U' || e.key === 'u')) e.preventDefault();
+        });
+    </script>
+</body>
+</html>
+
+
