@@ -9,12 +9,14 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
     <style>
-        body, html { margin: 0; padding: 0; height: 100vh; width: 100%; overflow: hidden; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        #bg-slideshow { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; background-size: cover; background-position: center; transition: background-image 1s ease-in-out; }
+        /* Penyesuaian Body agar bisa di-scroll jika konten melebihi tinggi layar HP */
+        body, html { margin: 0; padding: 0; min-height: 100vh; width: 100%; overflow-x: hidden; overflow-y: auto; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        
+        /* Mengubah absolute menjadi fixed agar background tetap penuh meskipun di-scroll */
+        #bg-slideshow { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; background-size: cover; background-position: center; transition: background-image 1s ease-in-out; }
 
-        /* Overlay Gradasi agar teks selalu terbaca dengan jelas */
         .gradient-overlay {
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
@@ -23,25 +25,24 @@
             background: linear-gradient(135deg, rgba(0, 0, 0, 0.7) 0%, rgba(15, 32, 39, 0.6) 100%);
         }
 
-        /* Styling untuk teks shadow umum agar lebih pop-out */
         .text-shadow {
             text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
         }
         
-        /* Styling untuk widget jam dan tanggal */
         .jam-digital {
             font-size: 6rem;
-            font-weight: bold; /* Dibuat tebal (bold) */
+            font-weight: bold;
             line-height: 1;
+            transition: font-size 0.3s ease;
         }
 
         .tanggal-digital {
             font-size: 1.5rem;
             font-weight: 400;
             letter-spacing: 2px;
+            transition: font-size 0.3s ease;
         }
 
-        /* Styling khusus untuk area Quotes */
         .quote-area {
             font-size: 1.1rem;
             font-weight: 300;
@@ -49,10 +50,9 @@
             color: #e0e0e0;
             max-width: 600px;
             margin: 0 auto;
-            transition: opacity 0.5s ease;
+            transition: opacity 0.5s ease, font-size 0.3s ease;
         }
 
-        /* Styling untuk Ikon Menu Desktop */
         .desktop-icon {
             color: white;
             text-decoration: none;
@@ -68,7 +68,6 @@
             color: white;
         }
 
-        /* Kotak pembungkus seragam agar tinggi ikon & gambar sama rata */
         .icon-box {
             height: 50px;
             display: flex;
@@ -77,24 +76,65 @@
             margin-bottom: 10px;
         }
 
-        /* Mengatur ukuran Bootstrap Icon di dalam kotak */
         .desktop-icon i {
             font-size: 2.5rem;
             line-height: 1;
+            transition: font-size 0.3s ease;
         }
 
-        /* Mengatur ukuran Gambar URL di dalam kotak */
         .desktop-icon img {
             height: 2.5rem;
             width: 2.5rem;
             object-fit: contain;
             border-radius: 8px;
+            transition: all 0.3s ease;
         }
 
         .desktop-icon span {
             display: block;
             font-size: 0.9rem;
             font-weight: 500;
+            transition: font-size 0.3s ease;
+        }
+
+        /* =========================================
+           MEDIA QUERIES UNTUK RESPONSIVITAS 
+           ========================================= */
+           
+        /* Tampilan Tablet (Medium screens) */
+        @media (max-width: 992px) {
+            .jam-digital { font-size: 5rem; }
+            .tanggal-digital { font-size: 1.3rem; }
+            .desktop-icon { width: 100px; padding: 12px; }
+        }
+
+        /* Tampilan Mobile (Small screens) */
+        @media (max-width: 768px) {
+            .container-fluid { padding-top: 2rem; padding-bottom: 2rem; }
+            #ucapan-selamat { font-size: 1.5rem !important; }
+            
+            .jam-digital { font-size: 3.5rem; }
+            .tanggal-digital { font-size: 1rem; letter-spacing: 1px; }
+            
+            .quote-area { font-size: 0.95rem; padding: 0 15px; }
+            
+            .desktop-icon { width: 85px; padding: 8px; }
+            .icon-box { height: 40px; margin-bottom: 5px; }
+            .desktop-icon img { height: 2rem; width: 2rem; }
+            .desktop-icon i { font-size: 2rem; }
+            .desktop-icon span { font-size: 0.75rem; }
+        }
+
+        /* Tampilan HP yang sangat kecil (Extra small) */
+        @media (max-width: 400px) {
+            .jam-digital { font-size: 3rem; }
+            .desktop-icon { width: 75px; padding: 5px; }
+            .desktop-icon span { font-size: 0.7rem; }
+        }
+
+        /* Penyesuaian khusus jika orientasi layar landscape (tinggi layar kecil) */
+        @media (max-height: 600px) {
+            .container-fluid { justify-content: flex-start !important; padding-top: 1.5rem; padding-bottom: 2rem; }
         }
     </style>
 </head>
@@ -103,7 +143,8 @@
     <div id="bg-slideshow"></div>
     <div class="gradient-overlay"></div>
 
-    <div class="container-fluid h-100 d-flex flex-column justify-content-center align-items-center text-white text-center">
+    <!-- Menggunakan min-vh-100 agar konten tetap di tengah, namun bisa memanjang ke bawah jika ukuran layar sempit -->
+    <div class="container-fluid min-vh-100 d-flex flex-column justify-content-center align-items-center text-white text-center">
         
         <h2 id="ucapan-selamat" class="mb-4 fw-light text-shadow">Memuat ucapan...</h2>
 
@@ -112,11 +153,12 @@
             <div id="tanggal" class="tanggal-digital text-uppercase mt-2">Memuat tanggal...</div>
         </div>
 
-        <div class="quote-area mb-5 text-shadow">
+        <div class="quote-area mb-4 mb-md-5 text-shadow">
             <span id="teks-quote">"Memuat kata-kata semangat..."</span>
         </div>
 
-        <div class="d-flex gap-3 flex-wrap justify-content-center mt-4">
+        <!-- Menggunakan gap-2 gap-md-3 agar jarak antarikon lebih rapat di HP namun longgar di PC -->
+        <div class="d-flex gap-2 gap-md-3 flex-wrap justify-content-center mt-3 mt-md-4">
             <a href="https://bosp.kemendikdasmen.go.id/" target="_blank" class="desktop-icon text-center">
                 <div class="icon-box"><img src="logo-bosp.png" alt="BOS Salur"></div>
                 <span>BOSP Salur</span>
@@ -133,25 +175,24 @@
                 <div class="icon-box"><img src="https://upload.wikimedia.org/wikipedia/commons/8/84/Lambang_Daerah_Kab._Pamekasan%2C_Jawa_Timur.png" alt="Simasda"></div>
                 <span>Simasda</span>
             </a>
-            <a href="https://coretaxdjp.pajak.go.id/identityproviderportal/Account/Login" target="_blank" class="desktop-icon text-center">
-                <div class="icon-box"><img src="coretax.png" alt="Coretax"></div>
-                <span>Coretax</span>
-            </a>
             <a href="https://keuanganpamekasankab.com/simpad/mamin/index.php" target="_blank" class="desktop-icon text-center">
                 <div class="icon-box"><img src="https://upload.wikimedia.org/wikipedia/commons/8/84/Lambang_Daerah_Kab._Pamekasan%2C_Jawa_Timur.png" alt="SiBocil"></div>
                 <span>SiBocil</span>
             </a>
         </div>
 
-        <div class="d-flex gap-3 flex-wrap justify-content-center mt-4">
+        <div class="d-flex gap-2 gap-md-3 flex-wrap justify-content-center mt-2 mt-md-4">
             <a href="https://operatorwaru.github.io/koras-waru/" target="_blank" class="desktop-icon text-center">
-                <!-- <div class="icon-box"><i class="bi bi-box-seam"></i></div> -->
                 <div class="icon-box"><img src="koras.png" alt="Koras"></div>
                 <span>Koras</span>
             </a>
             <a href="https://operatorwaru.github.io/stock-opname/" target="_blank" class="desktop-icon text-center">
                 <div class="icon-box"><img src="sobos.png" alt="Sobos"></div>
                 <span>Sobos</span>
+            </a>
+            <a href="https://coretaxdjp.pajak.go.id/identityproviderportal/Account/Login" target="_blank" class="desktop-icon text-center">
+                <div class="icon-box"><img src="coretax.png" alt="Coretax"></div>
+                <span>Coretax</span>
             </a>
             <a href="https://operatorwaru.github.io/pajak-waru/" target="_blank" class="desktop-icon text-center">
                 <div class="icon-box"><img src="pajak-waru.png" alt="Pajak Waru"></div>
@@ -185,37 +226,27 @@
 
         // --- 2. Logika Pembaruan Slideshow & Ganti Quote ---
         function ubahBackgroundDanQuote() {
-            // Ganti gambar latar
             bgElement.style.backgroundImage = `url('${gambarBackground[indeksSaatIni]}')`;
-            
-            // Ganti quote secara bersamaan menggunakan sisa bagi (%)
             const indexQuote = indeksSaatIni % kumpulanQuotes.length;
             quoteElement.textContent = kumpulanQuotes[indexQuote];
-
-            // Pindah ke indeks berikutnya
             indeksSaatIni = (indeksSaatIni + 1) % gambarBackground.length;
         }
 
-        // Jalankan fungsi ini saat pertama kali web dibuka, lalu ulangi tiap 8 detik
         ubahBackgroundDanQuote();
         setInterval(ubahBackgroundDanQuote, 8000);
-
 
         // --- 3. Logika Jam, Tanggal, dan Ucapan Dinamis ---
         function updateWaktu() {
             const sekarang = new Date();
             
-            // Pengaturan Jam (Format HH:MM)
             const jamAngka = sekarang.getHours();
             const jamText = String(jamAngka).padStart(2, '0');
             const menitText = String(sekarang.getMinutes()).padStart(2, '0');
             document.getElementById('jam').textContent = `${jamText}:${menitText}`;
 
-            // Pengaturan Tanggal Bahasa Indonesia
             const opsiTanggal = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
             document.getElementById('tanggal').textContent = sekarang.toLocaleDateString('id-ID', opsiTanggal);
 
-            // Menentukan Kalimat Ucapan berdasarkan Jam
             let sapaan = "";
             if (jamAngka >= 0 && jamAngka < 11) {
                 sapaan = "Selamat Pagi";
@@ -227,14 +258,11 @@
                 sapaan = "Selamat Malam";
             }
             
-            // Tampilkan sapaan dinamis ke layar
             document.getElementById('ucapan-selamat').textContent = `${sapaan}, Operator Waru`;
         }
 
-        // Jalankan jam segera, lalu perbarui setiap 1 detik
         updateWaktu();
         setInterval(updateWaktu, 1000);
-
 
         // ==========================================
         // PROTEKSI HALAMAN
@@ -248,5 +276,3 @@
     </script>
 </body>
 </html>
-
-
